@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventPass | Sistema de Compra de Boletos</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="brand">
+          <span class="brand-icon">🎟️</span>
+          <div>
+            <h1>EventPass</h1>
+            <p>Gestión de eventos y compra de boletos</p>
+          </div>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="#catalogo">Eventos</a></li>
+          <li><a href="#compra">Compra</a></li>
+          <li><a href="#registro-evento">Registro</a></li>
+          <li><a href="#estado">Estado</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-content">
+          <span class="tag">Sistema MVC + SOA</span>
+          <h2>
+            Consulta eventos, selecciona boletos y confirma tu compra en línea
+          </h2>
+          <p>
+            Plataforma digital para gestionar conciertos, obras escénicas y
+            eventos deportivos, permitiendo la consulta de disponibilidad,
+            registro de clientes, pago y seguimiento de transacciones.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#catalogo" class="btn primary">🔎 Consultar eventos</a>
+            <a href="#compra" class="btn secondary">🎫 Comprar boleto</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img
+            src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&auto=format&fit=crop"
+            alt="Evento musical en vivo con público"
+          />
+        </div>
+      </section>
+
+      <!-- CATÁLOGO DE EVENTOS -->
+      <section id="catalogo" class="section">
+        <div class="section-header">
+          <span class="section-label">Vista</span>
+          <h2>Catálogo de eventos</h2>
+          <p>
+            Consulta eventos disponibles por tipo de actividad, ubicación, fecha
+            y tipo de acceso.
+          </p>
+        </div>
+
+        <div class="filters-panel">
+          <div class="form-group">
+            <label for="buscarEvento">Buscar evento</label>
+            <input
+              type="text"
+              id="buscarEvento"
+              placeholder="Ejemplo: concierto, teatro, fútbol"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tipoEvento">Tipo de actividad</label>
+            <select id="tipoEvento">
+              <option value="">Todos los eventos</option>
+              <option value="concierto">Concierto</option>
+              <option value="teatro">Obra escénica</option>
+              <option value="deporte">Evento deportivo</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tipoAccesoFiltro">Tipo de acceso</label>
+            <select id="tipoAccesoFiltro">
+              <option value="">Todos los accesos</option>
+              <option value="general">General</option>
+              <option value="preferente">Preferente</option>
+              <option value="vip">VIP</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fechaFiltro">Fecha del evento</label>
+            <input type="date" id="fechaFiltro" />
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn primary" id="btnBuscarEventos">🔎 Buscar</button>
+            <button class="btn secondary" id="btnLimpiarFiltros">
+              🧹 Limpiar
+            </button>
+          </div>
+        </div>
+
+        <div class="events-grid" id="eventosContainer">
+          <article
+            class="event-card"
+            data-tipo="concierto"
+            data-acceso="vip"
+            data-nombre="concierto live night"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&auto=format&fit=crop"
+              alt="Concierto en vivo"
+            />
+            <div class="event-body">
+              <span class="event-type">🎵 Concierto</span>
+              <h3>Live Night Concert</h3>
+              <p>
+                Presentación musical en vivo con zona general, preferente y VIP.
+              </p>
+
+              <ul class="event-info">
+                <li>📍 Auditorio Central</li>
+                <li>📅 2026-06-18</li>
+                <li>🎫 Boletos disponibles: <strong>120</strong></li>
+              </ul>
+
+              <button
+                class="btn primary seleccionar-evento"
+                data-evento="Live Night Concert"
+              >
+                Seleccionar actividad
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="event-card"
+            data-tipo="teatro"
+            data-acceso="preferente"
+            data-nombre="obra escenica la ultima funcion"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=900&auto=format&fit=crop"
+              alt="Escenario teatral"
+            />
+            <div class="event-body">
+              <span class="event-type">🎭 Obra escénica</span>
+              <h3>La Última Función</h3>
+              <p>Obra teatral con asientos numerados y selección de zona.</p>
+
+              <ul class="event-info">
+                <li>📍 Teatro Metropolitano</li>
+                <li>📅 2026-06-25</li>
+                <li>🎫 Boletos disponibles: <strong>85</strong></li>
+              </ul>
+
+              <button
+                class="btn primary seleccionar-evento"
+                data-evento="La Última Función"
+              >
+                Seleccionar actividad
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="event-card"
+            data-tipo="deporte"
+            data-acceso="general"
+            data-nombre="final deportiva nacional"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=900&auto=format&fit=crop"
+              alt="Evento deportivo en estadio"
+            />
+            <div class="event-body">
+              <span class="event-type">🏟️ Evento deportivo</span>
+              <h3>Final Deportiva Nacional</h3>
+              <p>
+                Encuentro deportivo con zonas por sección y disponibilidad en
+                tiempo real.
+              </p>
+
+              <ul class="event-info">
+                <li>📍 Estadio Norte</li>
+                <li>📅 2026-07-02</li>
+                <li>🎫 Boletos disponibles: <strong>300</strong></li>
+              </ul>
+
+              <button
+                class="btn primary seleccionar-evento"
+                data-evento="Final Deportiva Nacional"
+              >
+                Seleccionar actividad
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- COMPRA DE BOLETO -->
+      <section id="compra" class="section split-section">
+        <div class="section-header">
+          <span class="section-label">Vista</span>
+          <h2>Compra de boleto</h2>
+          <p>
+            Captura los datos del cliente, selecciona el boleto y confirma la
+            transacción.
+          </p>
+        </div>
+
+        <div class="layout-grid">
+          <form id="formCompra" class="form-card">
+            <h3>🧾 Datos de compra</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombreCliente">Nombre del usuario</label>
+                <input
+                  type="text"
+                  id="nombreCliente"
+                  placeholder="Ejemplo: Marco Naredo"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="correoCliente">Correo electrónico</label>
+                <input
+                  type="email"
+                  id="correoCliente"
+                  placeholder="Ejemplo: usuario@email.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="telefonoCliente">Teléfono</label>
+                <input
+                  type="tel"
+                  id="telefonoCliente"
+                  placeholder="Ejemplo: 2221234567"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="eventoSeleccionado">Evento seleccionado</label>
+                <input
+                  type="text"
+                  id="eventoSeleccionado"
+                  placeholder="Selecciona un evento del catálogo"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="tipoAcceso">Tipo de acceso</label>
+                <select id="tipoAcceso" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="General">General - $500</option>
+                  <option value="Preferente">Preferente - $900</option>
+                  <option value="VIP">VIP - $1500</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="numeroBoletos">Número de asientos</label>
+                <input
+                  type="number"
+                  id="numeroBoletos"
+                  min="1"
+                  max="6"
+                  value="1"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="zonaAsignada">Espacio asignado</label>
+                <select id="zonaAsignada" required>
+                  <option value="">Selecciona zona o sección</option>
+                  <option value="Zona A">Zona A</option>
+                  <option value="Zona B">Zona B</option>
+                  <option value="Zona C">Zona C</option>
+                  <option value="Palco VIP">Palco VIP</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="metodoPago">Método de pago</label>
+                <select id="metodoPago" required>
+                  <option value="">Selecciona método</option>
+                  <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+                  <option value="Tarjeta de débito">Tarjeta de débito</option>
+                  <option value="Transferencia">Transferencia</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="datosContacto">Datos de contacto adicionales</label>
+              <textarea
+                id="datosContacto"
+                rows="4"
+                placeholder="Ejemplo: enviar confirmación por correo y WhatsApp"
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn secondary" id="btnReservar">
+                Reservar espacio
+              </button>
+              <button type="submit" class="btn primary">
+                Confirmar compra
+              </button>
+              <button type="reset" class="btn danger" id="btnCancelarCompra">
+                Cancelar
+              </button>
+            </div>
+          </form>
+
+          <aside class="summary-card">
+            <h3>📋 Resumen de transacción</h3>
+
+            <div class="summary-item">
+              <span>Estado del proceso</span>
+              <strong id="estadoProceso">En registro</strong>
+            </div>
+
+            <div class="summary-item">
+              <span>Estado del boleto</span>
+              <strong id="estadoBoleto">Disponible</strong>
+            </div>
+
+            <div class="summary-item">
+              <span>Estado del pago</span>
+              <strong id="estadoPago">Pendiente</strong>
+            </div>
+
+            <div class="summary-item">
+              <span>Total estimado</span>
+              <strong id="totalCompra">$0.00</strong>
+            </div>
+
+            <div class="seat-map">
+              <h4>Distribución de asientos</h4>
+              <div class="stage">Escenario</div>
+              <div class="seats">
+                <button class="seat available">A1</button>
+                <button class="seat available">A2</button>
+                <button class="seat reserved">A3</button>
+                <button class="seat available">B1</button>
+                <button class="seat sold">B2</button>
+                <button class="seat available">B3</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- REGISTRO DEL EVENTO -->
+      <section id="registro-evento" class="section">
+        <div class="section-header">
+          <span class="section-label">Vista</span>
+          <h2>Registro del evento</h2>
+          <p>
+            Formulario administrativo para registrar eventos, lugares, capacidad
+            y responsables.
+          </p>
+        </div>
+
+        <form id="formRegistroEvento" class="form-card wide">
+          <h3>📝 Datos del evento</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombreEventoAdmin">Nombre del evento</label>
+              <input
+                type="text"
+                id="nombreEventoAdmin"
+                placeholder="Ejemplo: Festival Rock 2026"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="tipoEventoAdmin">Tipo de evento</label>
+              <select id="tipoEventoAdmin" required>
+                <option value="">Selecciona tipo</option>
+                <option value="Concierto">Concierto</option>
+                <option value="Obra escénica">Obra escénica</option>
+                <option value="Evento deportivo">Evento deportivo</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="estadoEventoAdmin">Estado del evento</label>
+              <select id="estadoEventoAdmin" required>
+                <option value="Programado">Programado</option>
+                <option value="En curso">En curso</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fechaEventoAdmin">Fecha del evento</label>
+              <input type="date" id="fechaEventoAdmin" required />
+            </div>
+
+            <div class="form-group">
+              <label for="ubicacionEventoAdmin">Ubicación</label>
+              <input
+                type="text"
+                id="ubicacionEventoAdmin"
+                placeholder="Ejemplo: Auditorio Central"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="capacidadEventoAdmin">Capacidad total</label>
+              <input
+                type="number"
+                id="capacidadEventoAdmin"
+                placeholder="Ejemplo: 500"
+                min="1"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="responsableEventoAdmin"
+                >Responsable / desarrollador del evento</label
+              >
+              <input
+                type="text"
+                id="responsableEventoAdmin"
+                placeholder="Ejemplo: Cantante, actor, deportista o equipo"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="precioBaseAdmin">Precio base</label>
+              <input
+                type="number"
+                id="precioBaseAdmin"
+                placeholder="Ejemplo: 500"
+                min="0"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="imagenEventoAdmin"
+                >URL de imagen representativa</label
+              >
+              <input
+                type="url"
+                id="imagenEventoAdmin"
+                placeholder="Ejemplo: https://imagen.com/evento.jpg"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcionEventoAdmin">Descripción del evento</label>
+            <textarea
+              id="descripcionEventoAdmin"
+              rows="4"
+              placeholder="Describe las características principales del evento"
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">💾 Guardar evento</button>
+            <button
+              type="button"
+              class="btn secondary"
+              id="btnActualizarEvento"
+            >
+              🔄 Actualizar
+            </button>
+            <button type="reset" class="btn danger">❌ Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- VISTA SERVICIO SOA -->
+      <section id="estado" class="section">
+        <div class="section-header">
+          <span class="section-label">Vista servicio SOA</span>
+          <h2>Servicio de compra de boletos</h2>
+          <p>
+            Simulación del flujo entre servicios: consulta, disponibilidad,
+            cliente, pago y confirmación.
+          </p>
+        </div>
+
+        <div class="service-flow">
+          <div class="service-box">
+            <span>🔎</span>
+            <h3>Consulta de evento</h3>
+            <p>Recibe la solicitud y devuelve datos del evento.</p>
+          </div>
+
+          <div class="service-arrow">→</div>
+
+          <div class="service-box">
+            <span>🎫</span>
+            <h3>Disponibilidad</h3>
+            <p>Valida boletos disponibles y reserva espacio.</p>
+          </div>
+
+          <div class="service-arrow">→</div>
+
+          <div class="service-box">
+            <span>👤</span>
+            <h3>Gestión de cliente</h3>
+            <p>Recupera o registra los datos del usuario.</p>
+          </div>
+
+          <div class="service-arrow">→</div>
+
+          <div class="service-box">
+            <span>💳</span>
+            <h3>Pago</h3>
+            <p>Procesa el pago y devuelve aprobado o rechazado.</p>
+          </div>
+
+          <div class="service-arrow">→</div>
+
+          <div class="service-box">
+            <h3>Confirmación</h3>
+            <p>Genera folio y estado final de la operación.</p>
+          </div>
+        </div>
+
+        <div class="status-panel">
+          <h3>🔎 Consulta de estado de operación</h3>
+
+          <div class="status-form">
+            <div class="form-group">
+              <label for="folioBusqueda">Folio de compra</label>
+              <input
+                type="text"
+                id="folioBusqueda"
+                placeholder="Ejemplo: EVT-2026-0001"
+              />
+            </div>
+
+            <button class="btn primary" id="btnConsultarEstado">
+              🔎 Consultar estado
+            </button>
+          </div>
+
+          <div class="status-result" id="resultadoEstado">
+            <p>Ingresa un folio para consultar el estado de la transacción.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <p>
+        Evidencia de Aprendizaje - Diseno de interfaz - Jose Manuel Veana Naredo
+      </p>
+    </footer>
+  </body>
+</html>
